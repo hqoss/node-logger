@@ -1,0 +1,47 @@
+{
+  "name": "@asri/logger",
+  "version": "0.0.0-alpha.3",
+  "description": "A light-weight, performant, and consistent approach to logging.",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "compile": "rm -rf ./dist && tsc",
+    "format": "prettier --write \"./{src,test}/**/*.ts\"",
+    "format:check": "prettier --check \"./{src,test}/**/*.ts\"",
+    "test": "jest",
+    "prepare": "npm run format:check && npm run compile",
+    "prepublishOnly": "npm test",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:slavovojacek/logger.git"
+  },
+  "keywords": [
+    "log",
+    "logger",
+    "logging",
+    "pino",
+    "javascript",
+    "js",
+    "typescript",
+    "node",
+    "node.js"
+  ],
+  "author": "Slavo Vojacek",
+  "license": "MIT",
+  "dependencies": {
+    "pino": "^5.17.0",
+    "tslib": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/pino": "^5.17.0",
+    "@types/uuid": "^7.0.2",
+    "jest": "^25.1.0",
+    "prettier": "2.0.2",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3",
+    "uuid": "^7.0.2"
+  }
+}
