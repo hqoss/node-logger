@@ -4,21 +4,25 @@
 
 A light-weight, performant, and consistent approach to logging.
 
-## Legend
+## Table of contents
 
-- [Introduction](#-logger)
-- [Why use `logger`](#why-use-logger)
-- [Install](#install)
-- [Usage](#usage)
-- [Performance](#performance)
-- [Core design principles](#core-design-principles)
-- [Why TypeScript?](#why-typescript)
-  - [Technical excellence and agile ways of working](#technical-excellence-and-agile-ways-of-working)
-  - [Encourage Best Practices](#encourage-best-practices)
-- [Node version support](#node-version-support)
-  - [Why ES2018?](#why-es2018)
-- [Testing](#testing)
-- [TODO](#todo)
+-   [Why use `logger`](#why-use-logger)
+
+-   [Install](#install)
+
+-   [Usage](#usage)
+
+-   [Performance](#performance)
+
+-   [Core design principles](#core-design-principles)
+
+-   [Node version support](#node-version-support)
+
+    -   [Why ES2018?](#why-es2018)
+
+-   [Testing](#testing)
+
+-   [TODO](#todo)
 
 ## Why use `logger`
 
@@ -26,12 +30,12 @@ A light-weight, performant, and consistent approach to logging.
 
 `logger` builds on `pino` to enable composable and re-usable logger implementations.
 
-- Enforces a consistent approach to logging.
-- Greatly reduces common boilerplate such as
-  - logging metadata,
-  - enforcing a consistent log format,
-  - useful defaults, and more.
-- It is written in TypeScript.
+-   Enforces a consistent approach to logging.
+-   Greatly reduces common boilerplate such as
+    -   logging metadata,
+    -   enforcing a consistent log format,
+    -   useful defaults, and more.
+-   It is written in TypeScript.
 
 ## Install
 
@@ -46,9 +50,12 @@ npm install @types/pino --save-dev
 ## Usage
 
 ```typescript
-import { Logger } from "@asri/logger";
+import { Logger } from "@hqoss/logger";
 
-// TODO
+export default (correlationId: string) => new Logger({
+  correlationId,
+  base: { service: `${name}@${version}` },
+});
 ```
 
 ## Performance
@@ -57,17 +64,17 @@ TODO
 
 ## Core design principles
 
-* **Code quality**; The modules contained within this package may be used in mission-critical software, so it's important that the code is performant, secure, and battle-tested.
+-   **Code quality**; The modules contained within this package may be used in mission-critical software, so it's important that the code is performant, secure, and battle-tested.
 
-* **Developer experience**; Developers must be able to use this package with no significant barriers to entry. It has to be easy-to-find, well-documented, and pleasant to use.
+-   **Developer experience**; Developers must be able to use this package with no significant barriers to entry. It has to be easy-to-find, well-documented, and pleasant to use.
 
-* **Modularity & Configurability**; It's important that our colleagues can compose, and easily change the ways in which they use this package.
+-   **Modularity & Configurability**; It's important that our colleagues can compose, and easily change the ways in which they use this package.
 
 ## Node version support
 
 The TypeScript compiler is configured to target ES2018. In practice, this means projects consuming this package should run on Node 12 or higher, unless additional compilation/transpilation steps are in place to ensure compatibility with the target runtime.
 
-Please see [https://node.green/#ES2018](https://node.green/#ES2018) for reference.
+Please see <https://node.green/#ES2018> for reference.
 
 ### Why ES2018?
 
@@ -89,10 +96,10 @@ Prefer using [Nock](https://github.com/nock/nock) over mocking.
 
 A quick and dirty tech debt tracker before we move to Issues.
 
-* [ ] Write contributing guide
-* [ ] Complete testing section, add best practices
-* [ ] Describe scripts and usage, add best practices
-* [ ] Add typespec and generate docs
-* [ ] Describe security best practices, e.g. `npm doctor`, `npm audit`, `npm outdated`, `ignore-scripts` in `.npmrc`, etc.
-* [ ] Add "Why should I use this" section
-* [ ] Library architectural design (+ diagram?)
+-   [ ] Write contributing guide
+-   [ ] Complete testing section, add best practices
+-   [ ] Describe scripts and usage, add best practices
+-   [ ] Add typespec and generate docs
+-   [ ] Describe security best practices, e.g. `npm doctor`, `npm audit`, `npm outdated`, `ignore-scripts` in `.npmrc`, etc.
+-   [ ] Add "Why should I use this" section
+-   [ ] Library architectural design (+ diagram?)
