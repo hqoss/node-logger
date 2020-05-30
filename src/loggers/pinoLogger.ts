@@ -1,4 +1,4 @@
-import pino, { Logger } from "pino";
+import pino, { Logger, LoggerOptions } from "pino";
 
 import { PinoLoggerInitOpts } from "./types";
 
@@ -18,14 +18,17 @@ class PinoLogger {
     this.meta = { correlationId, pid };
   }
 
-  static readonly initOpts = {
-    useLevelLabels: true,
-    levelKey: "type",
+  static readonly initOpts: LoggerOptions = {
     timestamp: () => {
       const now = new Date().toISOString();
       return `,"timestamp":"${now}"`;
     },
     level: "debug",
+    formatters: {
+      level(label: string, _number: number) {
+        return { level: label };
+      },
+    },
   };
 
   /**
