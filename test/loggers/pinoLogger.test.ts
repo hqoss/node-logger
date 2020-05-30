@@ -123,7 +123,23 @@ describe("Logger", () => {
 
   it("uses ISO datetime as timestamp by default", () => {
     // TODO match against ISO date string
-    expect(Logger.initOpts.timestamp()).toMatch(`,"timestamp":"`);
+    const timestampFormatter = Logger.initOpts?.timestamp;
+
+    if (timestampFormatter && typeof timestampFormatter === "function") {
+      expect(timestampFormatter()).toMatch(`,"timestamp":"`);
+    } else {
+      throw new Error("timestamp formatter must be implemented");
+    }
+  });
+
+  it("uses custom level formatter by default", () => {
+    const levelFormatter = Logger.initOpts?.formatters?.level;
+
+    if (levelFormatter) {
+      expect(levelFormatter("debug", 42)).toEqual({ level: "debug" });
+    } else {
+      throw new Error("level formatter must be implemented");
+    }
   });
 
   it("merges user-provided opts with default opts", () => {
