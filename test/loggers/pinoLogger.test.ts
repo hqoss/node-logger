@@ -1,14 +1,14 @@
 import pino, { LoggerOptions } from "pino";
 import { v4 as uuidv4 } from "uuid";
 
-import { Logger } from "../../src/loggers";
+import { PinoLogger } from "../../src/loggers";
 
 jest.mock("pino");
 
-describe("Logger", () => {
+describe("PinoLogger", () => {
   let mockedPino: any = pino;
 
-  let logger: Logger;
+  let logger: PinoLogger;
 
   let correlationId: string;
 
@@ -45,7 +45,7 @@ describe("Logger", () => {
   });
 
   it("logs debug message", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     logger.debug("debug message");
 
@@ -55,12 +55,12 @@ describe("Logger", () => {
         correlationId,
         pid: process.pid,
       },
-      initOpts: Logger.initOpts,
+      initOpts: PinoLogger.initOpts,
     });
   });
 
   it("logs info message", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     logger.info("info message");
 
@@ -70,12 +70,12 @@ describe("Logger", () => {
         correlationId,
         pid: process.pid,
       },
-      initOpts: Logger.initOpts,
+      initOpts: PinoLogger.initOpts,
     });
   });
 
   it("logs warn message", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     logger.warn("warn message");
 
@@ -85,12 +85,12 @@ describe("Logger", () => {
         correlationId,
         pid: process.pid,
       },
-      initOpts: Logger.initOpts,
+      initOpts: PinoLogger.initOpts,
     });
   });
 
   it("logs error message", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     logger.error("error message");
 
@@ -100,12 +100,12 @@ describe("Logger", () => {
         correlationId,
         pid: process.pid,
       },
-      initOpts: Logger.initOpts,
+      initOpts: PinoLogger.initOpts,
     });
   });
 
   it("logs error stack", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     const error = new Error("error object");
 
@@ -117,13 +117,13 @@ describe("Logger", () => {
         correlationId,
         pid: process.pid,
       },
-      initOpts: Logger.initOpts,
+      initOpts: PinoLogger.initOpts,
     });
   });
 
   it("uses ISO datetime as timestamp by default", () => {
     // TODO match against ISO date string
-    const timestampFormatter = Logger.initOpts?.timestamp;
+    const timestampFormatter = PinoLogger.initOpts?.timestamp;
 
     if (timestampFormatter && typeof timestampFormatter === "function") {
       expect(timestampFormatter()).toMatch(`,"timestamp":"`);
@@ -133,7 +133,7 @@ describe("Logger", () => {
   });
 
   it("uses custom level formatter by default", () => {
-    const levelFormatter = Logger.initOpts?.formatters?.level;
+    const levelFormatter = PinoLogger.initOpts?.formatters?.level;
 
     if (levelFormatter) {
       expect(levelFormatter("debug", 42)).toEqual({ level: "debug" });
@@ -143,7 +143,7 @@ describe("Logger", () => {
   });
 
   it("merges user-provided opts with default opts", () => {
-    logger = new Logger({ correlationId, base: { app: "test-runner" } });
+    logger = new PinoLogger({ correlationId, base: { app: "test-runner" } });
 
     logger.info("info message with app");
 
@@ -154,14 +154,14 @@ describe("Logger", () => {
         pid: process.pid,
       },
       initOpts: {
-        ...Logger.initOpts,
+        ...PinoLogger.initOpts,
         base: { app: "test-runner" },
       },
     });
   });
 
   it("logs custom metadata", () => {
-    logger = new Logger({ correlationId });
+    logger = new PinoLogger({ correlationId });
 
     logger.info("info message");
 

@@ -1,5 +1,3 @@
-**⚠️ WARNING: This project is still under development.**
-
 # 🖊 Logger
 
 A light-weight, performant, and consistent approach to logging.
@@ -39,18 +37,18 @@ A light-weight, performant, and consistent approach to logging.
 
 ## Install
 
-**⚠️ NOTE:** The TypeScript compiler is configured to target `ES2018` and the library uses `commonjs` for module resolution (for now). Read more about [Node version support](#node-version-support).
-
 ```bash
-npm install @asri/logger
+npm install @hqoss/logger
 # Additionally, for TypeScript users
 npm install @types/pino --save-dev
 ```
 
+**⚠️ NOTE:** The TypeScript compiler is configured to target `ES2018` and the library uses `commonjs` for module resolution (for now). Read more about [Node version support](#node-version-support).
+
 ## Usage
 
 ```typescript
-import { Logger } from "@hqoss/logger";
+import { PinoLogger } from "@hqoss/logger";
 
 export default (correlationId: string) => new Logger({
   correlationId,
