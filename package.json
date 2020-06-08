@@ -1,6 +1,6 @@
 {
   "name": "@hqoss/logger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A light-weight, performant, and consistent approach to logging.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
